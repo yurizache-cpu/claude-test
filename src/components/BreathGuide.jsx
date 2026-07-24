@@ -3,26 +3,53 @@ import { AnimatePresence, motion as Motion } from 'framer-motion'
 import { X } from 'lucide-react'
 
 // Experiência de respiração guiada: inspire (4s) · segure (2s) · solte (6s).
-// O círculo cresce e diminui no ritmo, convidando a acompanhar.
+// O círculo cresce e diminui no ritmo e mostra a contagem dos segundos.
 const PHASES = [
   { label: 'Inspire', dur: 4, scale: 1 },
   { label: 'Segure', dur: 2, scale: 1 },
   { label: 'Solte', dur: 6, scale: 0.55 },
 ]
 
+// Contagem regressiva da fase atual, mostrada no centro da bolinha.
+// Remontada a cada fase (via key), começa cheia e desce até 1.
+function PhaseCount({ dur }) {
+  const [count, setCount] = useState(dur)
+
+  useEffect(() => {
+    const tick = setInterval(() => setCount((c) => Math.max(1, c - 1)), 1000)
+    return () => clearInterval(tick)
+  }, [])
+
+  return (
+    <AnimatePresence mode="popLayout">
+      <Motion.span
+        key={count}
+        className="breath-count"
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 1.25 }}
+        transition={{ duration: 0.35 }}
+      >
+        {count}
+      </Motion.span>
+    </AnimatePresence>
+  )
+}
+
 export default function BreathGuide({ onClose }) {
   const [step, setStep] = useState(0)
   const [cycles, setCycles] = useState(0)
   const phase = PHASES[step % PHASES.length]
 
+  // Avança para a próxima fase ao fim da duração.
   useEffect(() => {
-    const t = setTimeout(() => {
+    const next = setTimeout(() => {
       setStep((s) => {
         if ((s + 1) % PHASES.length === 0) setCycles((c) => c + 1)
         return s + 1
       })
     }, phase.dur * 1000)
-    return () => clearTimeout(t)
+    return () => clearTimeout(next)
   }, [step, phase.dur])
 
   useEffect(() => {
@@ -53,6 +80,7 @@ export default function BreathGuide({ onClose }) {
           transition={{ duration: phase.dur, ease: 'easeInOut' }}
         >
           <Motion.div className="breath-orb-core" />
+          <PhaseCount key={step} dur={phase.dur} />
         </Motion.div>
 
         <div className="breath-copy">

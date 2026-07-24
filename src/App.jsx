@@ -197,14 +197,17 @@ export default function App() {
               height="100"
             />
           </Motion.button>
-          <Motion.span
-            className="breath-hint"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.6, duration: 0.8 }}
+          <Motion.button
+            className="breath-cta"
+            onClick={() => setBreathing(true)}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <Wind size={12} /> toque para respirar comigo
-          </Motion.span>
+            <Wind size={15} /> Toque para respirar comigo
+          </Motion.button>
 
           <Motion.span
             className="eyebrow"
