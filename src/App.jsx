@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import Background from './components/Background.jsx'
 import BreathGuide from './components/BreathGuide.jsx'
+import ShareSheet from './components/ShareSheet.jsx'
 import TiltCard from './components/TiltCard.jsx'
 import { LINK_GROUPS, PROFILE } from './config.js'
 
@@ -95,33 +96,29 @@ function PhraseRotator() {
 
 function ShareButton() {
   const [copied, setCopied] = useState(false)
+  const [sheetOpen, setSheetOpen] = useState(false)
+
+  const showCopied = () => {
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2200)
+  }
 
   const share = async () => {
     const url = window.location.href
+    const title = `${PROFILE.name} — ${PROFILE.role}`
+    // Celulares: abre o menu nativo do sistema (WhatsApp, Instagram,
+    // Telegram... tudo que o aparelho oferecer).
     if (navigator.share) {
       try {
-        await navigator.share({ title: PROFILE.name, text: PROFILE.role, url })
+        await navigator.share({ title, text: title, url })
         return
       } catch (err) {
-        // Usuário cancelou o menu de compartilhar: não é erro.
+        // Usuário cancelou o menu: não é erro.
         if (err?.name === 'AbortError') return
       }
     }
-    try {
-      await navigator.clipboard.writeText(url)
-    } catch {
-      // Navegadores que bloqueiam a área de transferência
-      const ta = document.createElement('textarea')
-      ta.value = url
-      ta.style.position = 'fixed'
-      ta.style.opacity = '0'
-      document.body.appendChild(ta)
-      ta.select()
-      document.execCommand('copy')
-      ta.remove()
-    }
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2200)
+    // Sem menu nativo: abre o nosso menu com as principais redes.
+    setSheetOpen(true)
   }
 
   return (
@@ -135,6 +132,16 @@ function ShareButton() {
       >
         <Share2 size={17} />
       </Motion.button>
+      <AnimatePresence>
+        {sheetOpen && (
+          <ShareSheet
+            url={window.location.href}
+            title={`${PROFILE.name} — ${PROFILE.role}`}
+            onClose={() => setSheetOpen(false)}
+            onCopied={showCopied}
+          />
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {copied && (
           <Motion.div
