@@ -55,7 +55,7 @@ export const LINK_GROUPS = [
       {
         icon: 'tools',
         label: 'Ferramentas de autoconhecimento',
-        desc: 'Testes e recursos gratuitos no meu site',
+        desc: '+ de 11 ferramentas gratuitas no meu site',
         href: `${SITE_URL}/ferramentas`,
       },
     ],

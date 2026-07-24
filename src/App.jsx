@@ -214,8 +214,8 @@ export default function App() {
               className="avatar-photo"
               src={PROFILE.photo}
               alt={`Foto de ${PROFILE.name}`}
-              width="100"
-              height="100"
+              width="128"
+              height="128"
             />
           </Motion.button>
           <Motion.button
