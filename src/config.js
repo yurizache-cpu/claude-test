@@ -22,8 +22,8 @@ export const EMAIL = 'yurizache@gmail.com'
 
 // Grupos de links. `highlight: true` deixa o cartão em destaque.
 // Para adicionar uma rede nova, copie um bloco e ajuste ícone, texto e link.
-// Ícones disponíveis: whatsapp, instagram, mail, site, youtube, spotify,
-// tiktok, calendar, article.
+// Ícones disponíveis: whatsapp, instagram, mail, site, tools, youtube,
+// spotify, tiktok, calendar, article.
 export const LINK_GROUPS = [
   {
     title: 'Vamos conversar',
@@ -46,6 +46,17 @@ export const LINK_GROUPS = [
         label: 'E-mail',
         desc: EMAIL,
         href: `mailto:${EMAIL}?subject=${encodeURIComponent('Contato — psicoterapia')}`,
+      },
+    ],
+  },
+  {
+    title: 'Ferramentas',
+    links: [
+      {
+        icon: 'tools',
+        label: 'Ferramentas de autoconhecimento',
+        desc: 'Testes e recursos gratuitos no meu site',
+        href: `${SITE_URL}/ferramentas`,
       },
     ],
   },

@@ -11,6 +11,7 @@ import {
   Music2,
   Newspaper,
   Share2,
+  Wrench,
   Youtube,
 } from 'lucide-react'
 import Background from './components/Background.jsx'
@@ -21,6 +22,7 @@ const ICONS = {
   instagram: Instagram,
   mail: Mail,
   site: Globe,
+  tools: Wrench,
   youtube: Youtube,
   spotify: Music2,
   tiktok: Music2,
