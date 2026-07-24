@@ -2,7 +2,7 @@
 
 export const PROFILE = {
   name: 'Yuri Zaché',
-  initials: 'YZ',
+  photo: '/avatar.jpg',
   role: 'Psicólogo Clínico',
   crp: 'CRP 16/11434',
   bio: 'Psicoterapia para quem quer se entender melhor e viver com mais leveza. Atendimento online para todo o Brasil.',

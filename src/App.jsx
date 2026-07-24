@@ -189,7 +189,13 @@ export default function App() {
           >
             <span className="breath-ring" />
             <span className="breath-ring delay" />
-            <span className="avatar-mono">{PROFILE.initials}</span>
+            <img
+              className="avatar-photo"
+              src={PROFILE.photo}
+              alt={`Foto de ${PROFILE.name}`}
+              width="100"
+              height="100"
+            />
           </Motion.button>
           <Motion.span
             className="breath-hint"

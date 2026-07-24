@@ -15,7 +15,7 @@ export default function Background() {
     const target = { x: 0.5, y: 0.5 }
     const ripples = []
 
-    const COLORS = ['163, 201, 178', '110, 155, 130', '217, 205, 175']
+    const COLORS = ['107, 155, 134', '196, 117, 91', '212, 202, 187']
     const orbs = Array.from({ length: 7 }, (_, i) => ({
       x: Math.random(),
       y: Math.random(),
@@ -25,7 +25,7 @@ export default function Background() {
       driftX: 0.00006 + Math.random() * 0.0001,
       driftY: 0.00004 + Math.random() * 0.00008,
       color: COLORS[i % COLORS.length],
-      alpha: 0.04 + Math.random() * 0.05,
+      alpha: 0.05 + Math.random() * 0.06,
     }))
 
     const resize = () => {
@@ -90,12 +90,12 @@ export default function Background() {
           ripples.splice(i, 1)
           continue
         }
-        ctx.strokeStyle = `rgba(163, 201, 178, ${rp.alpha})`
+        ctx.strokeStyle = `rgba(74, 107, 93, ${rp.alpha})`
         ctx.lineWidth = 1.4
         ctx.beginPath()
         ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2)
         ctx.stroke()
-        ctx.strokeStyle = `rgba(163, 201, 178, ${rp.alpha * 0.4})`
+        ctx.strokeStyle = `rgba(74, 107, 93, ${rp.alpha * 0.4})`
         ctx.beginPath()
         ctx.arc(rp.x, rp.y, rp.r * 0.62, 0, Math.PI * 2)
         ctx.stroke()

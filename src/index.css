@@ -1,17 +1,30 @@
 :root {
-  --bg: #0d1411;
-  --surface: rgba(24, 34, 29, 0.78);
-  --surface-solid: #18221d;
-  --line: rgba(234, 239, 232, 0.1);
-  --line-strong: rgba(234, 239, 232, 0.18);
-  --text: #eaefe8;
-  --muted: #96a69b;
-  --faint: #64706a;
-  --sage: #a3c9b2;
-  --sage-deep: #6e9b82;
-  --sage-soft: rgba(163, 201, 178, 0.13);
-  --serif: 'Fraunces', Georgia, serif;
-  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Paleta alinhada a yuripsicologo.com.br */
+  --cream: #f5f0e8;
+  --cream-dark: #ede6d8;
+  --white: #fefcf8;
+  --sage: #4a6b5d;
+  --sage-light: #6b9b86;
+  --sage-dark: #2d4a3c;
+  --terracotta: #c4755b;
+  --terracotta-light: #d4917c;
+  --charcoal: #2b2d2a;
+  --warm-gray: #8a857d;
+  --sand: #d4cabb;
+
+  --bg: var(--cream);
+  --surface: rgba(254, 252, 248, 0.82);
+  --surface-solid: var(--white);
+  --line: rgba(43, 45, 42, 0.1);
+  --line-strong: rgba(43, 45, 42, 0.18);
+  --text: var(--charcoal);
+  --muted: #5f6159;
+  --faint: var(--warm-gray);
+  --sage-soft: rgba(74, 107, 93, 0.1);
+
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Outfit', system-ui, -apple-system, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -33,7 +46,7 @@ body {
 
 ::selection {
   background: var(--sage);
-  color: var(--bg);
+  color: var(--white);
 }
 
 /* ---------- fundo ---------- */
@@ -53,7 +66,7 @@ body {
   width: 780px;
   height: 620px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(163, 201, 178, 0.1) 0%, transparent 62%);
+  background: radial-gradient(circle, rgba(107, 155, 134, 0.16) 0%, transparent 62%);
   z-index: 0;
   pointer-events: none;
 }
@@ -81,12 +94,12 @@ body {
   margin-bottom: 34px;
 }
 
-/* Medalhão que "respira": dois anéis se expandem num ciclo lento e
-   contínuo. Tocar nele abre o exercício de respiração guiada. */
+/* Medalhão com a foto, que "respira" com dois anéis. Tocar abre a
+   respiração guiada. */
 .avatar-breath {
   position: relative;
-  width: 116px;
-  height: 116px;
+  width: 128px;
+  height: 128px;
   display: grid;
   place-items: center;
   margin-bottom: 10px;
@@ -102,76 +115,67 @@ body {
   border-radius: 50%;
 }
 
-.breath-hint {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
-  color: var(--faint);
-  letter-spacing: 0.06em;
-  margin-bottom: 20px;
-}
-
 .breath-ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px solid rgba(163, 201, 178, 0.45);
+  border: 1.5px solid rgba(74, 107, 93, 0.55);
   animation: breathe 7s ease-in-out infinite;
 }
 
 .breath-ring.delay {
   animation-delay: -3.5s;
-  border-color: rgba(163, 201, 178, 0.25);
+  border-color: rgba(196, 117, 91, 0.35);
 }
 
 @keyframes breathe {
   0%, 100% {
-    transform: scale(0.82);
-    opacity: 0.9;
+    transform: scale(0.84);
+    opacity: 0.95;
   }
   50% {
-    transform: scale(1.08);
+    transform: scale(1.1);
     opacity: 0.25;
   }
 }
 
-.avatar-mono {
-  width: 88px;
-  height: 88px;
+.avatar-photo {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-family: var(--serif);
-  font-size: 1.9rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: var(--sage);
-  background:
-    radial-gradient(ellipse 120% 100% at 50% 120%, var(--sage-soft) 0%, transparent 65%),
-    var(--surface-solid);
-  border: 1px solid var(--line-strong);
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+  object-fit: cover;
+  border: 3px solid var(--white);
+  box-shadow: 0 14px 34px rgba(43, 45, 42, 0.22);
+  display: block;
+}
+
+.breath-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--faint);
+  letter-spacing: 0.06em;
+  margin-bottom: 20px;
 }
 
 .eyebrow {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--sage);
+  color: var(--terracotta);
 }
 
 .profile h1 {
   font-family: var(--serif);
-  font-size: 2.6rem;
+  font-size: 2.9rem;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
+  line-height: 1.1;
   margin: 8px 0 10px;
-  background: linear-gradient(115deg, var(--text) 55%, var(--sage) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--sage-dark);
 }
 
 .name-letter {
@@ -179,25 +183,24 @@ body {
   white-space: pre;
 }
 
+.bio {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 27em;
+  text-wrap: balance;
+}
+
 .phrase {
-  min-height: 1.6em;
+  min-height: 1.7em;
   margin-top: 14px;
   font-family: var(--serif);
   font-style: italic;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--sage);
-  opacity: 0.85;
 }
 
 .phrase span {
   display: inline-block;
-}
-
-.bio {
-  color: var(--muted);
-  font-size: 0.98rem;
-  max-width: 27em;
-  text-wrap: balance;
 }
 
 /* ---------- grupos e cartões ---------- */
@@ -226,7 +229,7 @@ body {
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--line);
+  background: var(--sand);
 }
 
 .link-card {
@@ -236,18 +239,18 @@ body {
   align-items: center;
   gap: 17px;
   padding: 17px 20px;
-  border-radius: 17px;
+  border-radius: 18px;
   background: var(--surface);
   border: 1px solid var(--line);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(43, 45, 42, 0.05);
   text-decoration: none;
   color: var(--text);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
   will-change: transform;
 }
 
-/* Brilho que segue o ponteiro dentro do cartão */
 .card-sheen {
   position: absolute;
   inset: 0;
@@ -255,7 +258,7 @@ body {
   opacity: 0;
   background: radial-gradient(
     220px circle at var(--px, 50%) var(--py, 50%),
-    rgba(163, 201, 178, 0.14),
+    rgba(107, 155, 134, 0.16),
     transparent 65%
   );
   transition: opacity 0.3s ease;
@@ -266,8 +269,8 @@ body {
 }
 
 .link-card:hover {
-  border-color: var(--sage);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  border-color: var(--sage-light);
+  box-shadow: 0 16px 36px rgba(74, 107, 93, 0.18);
 }
 
 .link-card:focus-visible {
@@ -278,7 +281,7 @@ body {
 .link-icon {
   width: 46px;
   height: 46px;
-  border-radius: 13px;
+  border-radius: 14px;
   display: grid;
   place-items: center;
   background: var(--sage-soft);
@@ -303,7 +306,7 @@ body {
 }
 
 .link-text span {
-  font-size: 0.82rem;
+  font-size: 0.83rem;
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
@@ -322,29 +325,37 @@ body {
   transform: translate(2px, -2px);
 }
 
-/* cartão em destaque */
+/* cartão em destaque — verde sage, como o CTA do site */
 
 .link-card.highlight {
-  background: linear-gradient(135deg, var(--sage), var(--sage-deep));
+  background: linear-gradient(135deg, var(--sage), var(--sage-dark));
   border-color: transparent;
-  color: #0c1510;
+  color: var(--white);
+}
+
+.link-card.highlight .card-sheen {
+  background: radial-gradient(
+    220px circle at var(--px, 50%) var(--py, 50%),
+    rgba(254, 252, 248, 0.18),
+    transparent 65%
+  );
 }
 
 .link-card.highlight .link-icon {
-  background: rgba(12, 21, 16, 0.16);
-  color: #0c1510;
+  background: rgba(254, 252, 248, 0.16);
+  color: var(--white);
 }
 
 .link-card.highlight .link-text span {
-  color: rgba(12, 21, 16, 0.72);
+  color: rgba(254, 252, 248, 0.78);
 }
 
 .link-card.highlight .link-arrow {
-  color: rgba(12, 21, 16, 0.65);
+  color: rgba(254, 252, 248, 0.7);
 }
 
 .link-card.highlight:hover {
-  box-shadow: 0 18px 44px rgba(163, 201, 178, 0.28);
+  box-shadow: 0 18px 40px rgba(45, 74, 60, 0.35);
 }
 
 /* ---------- compartilhar / toast ---------- */
@@ -365,6 +376,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
   color: var(--text);
   cursor: pointer;
+  box-shadow: 0 2px 10px rgba(43, 45, 42, 0.08);
 }
 
 .share-btn:hover {
@@ -383,12 +395,11 @@ body {
   gap: 8px;
   padding: 11px 20px;
   border-radius: 999px;
-  background: var(--surface-solid);
-  border: 1px solid var(--line-strong);
-  color: var(--sage);
+  background: var(--sage-dark);
+  color: var(--white);
   font-size: 0.88rem;
   font-weight: 500;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 16px 40px rgba(43, 45, 42, 0.3);
 }
 
 /* ---------- respiração guiada ---------- */
@@ -399,7 +410,7 @@ body {
   z-index: 20;
   display: grid;
   place-items: center;
-  background: rgba(9, 14, 12, 0.9);
+  background: rgba(45, 74, 60, 0.96);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -414,15 +425,15 @@ body {
   display: grid;
   place-items: center;
   background: transparent;
-  border: 1px solid var(--line-strong);
-  color: var(--muted);
+  border: 1px solid rgba(254, 252, 248, 0.35);
+  color: rgba(254, 252, 248, 0.8);
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .breath-close:hover {
-  color: var(--text);
-  border-color: var(--sage);
+  color: var(--white);
+  border-color: var(--white);
 }
 
 .breath-stage {
@@ -438,7 +449,7 @@ body {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(163, 201, 178, 0.35);
+  border: 1px solid rgba(254, 252, 248, 0.35);
 }
 
 .breath-orb-core {
@@ -447,11 +458,11 @@ body {
   border-radius: 50%;
   background: radial-gradient(
     circle at 38% 32%,
-    rgba(163, 201, 178, 0.5),
-    rgba(110, 155, 130, 0.25) 55%,
-    rgba(110, 155, 130, 0.08) 100%
+    rgba(245, 240, 232, 0.85),
+    rgba(107, 155, 134, 0.5) 60%,
+    rgba(107, 155, 134, 0.15) 100%
   );
-  box-shadow: 0 0 90px rgba(163, 201, 178, 0.25);
+  box-shadow: 0 0 90px rgba(245, 240, 232, 0.3);
 }
 
 .breath-copy {
@@ -464,13 +475,13 @@ body {
 
 .breath-label {
   font-family: var(--serif);
-  font-size: 2rem;
-  color: var(--text);
+  font-size: 2.2rem;
+  color: var(--white);
 }
 
 .breath-sub {
-  font-size: 0.85rem;
-  color: var(--muted);
+  font-size: 0.88rem;
+  color: rgba(254, 252, 248, 0.75);
 }
 
 /* ---------- granulado ---------- */
@@ -480,7 +491,7 @@ body {
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -497,7 +508,7 @@ body {
 
 @media (max-width: 420px) {
   .profile h1 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
   }
 
   .link-text span {
