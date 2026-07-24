@@ -13,6 +13,7 @@ export default function Background() {
     let width, height, raf
     const mouse = { x: 0.5, y: 0.5 }
     const target = { x: 0.5, y: 0.5 }
+    const ripples = []
 
     const COLORS = ['163, 201, 178', '110, 155, 130', '217, 205, 175']
     const orbs = Array.from({ length: 7 }, (_, i) => ({
@@ -43,6 +44,15 @@ export default function Background() {
       target.y = e.clientY / height
     }
 
+    // Tocar na página cria círculos que se expandem devagar, como uma
+    // pedra caindo num lago parado.
+    const onTap = (e) => {
+      if (reduced) return
+      if (e.target.closest?.('a, button, [role="dialog"]')) return
+      ripples.push({ x: e.clientX, y: e.clientY, r: 6, alpha: 0.5 })
+      if (ripples.length > 12) ripples.shift()
+    }
+
     let t = 0
     const draw = () => {
       t += 1
@@ -71,6 +81,26 @@ export default function Background() {
         ctx.arc(x, y, r, 0, Math.PI * 2)
         ctx.fill()
       }
+
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const rp = ripples[i]
+        rp.r += 1.6
+        rp.alpha *= 0.985
+        if (rp.alpha < 0.01) {
+          ripples.splice(i, 1)
+          continue
+        }
+        ctx.strokeStyle = `rgba(163, 201, 178, ${rp.alpha})`
+        ctx.lineWidth = 1.4
+        ctx.beginPath()
+        ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2)
+        ctx.stroke()
+        ctx.strokeStyle = `rgba(163, 201, 178, ${rp.alpha * 0.4})`
+        ctx.beginPath()
+        ctx.arc(rp.x, rp.y, rp.r * 0.62, 0, Math.PI * 2)
+        ctx.stroke()
+      }
+
       raf = requestAnimationFrame(draw)
     }
 
@@ -78,10 +108,12 @@ export default function Background() {
     draw()
     window.addEventListener('resize', resize)
     window.addEventListener('pointermove', onMove, { passive: true })
+    window.addEventListener('pointerdown', onTap, { passive: true })
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
       window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerdown', onTap)
     }
   }, [])
 
