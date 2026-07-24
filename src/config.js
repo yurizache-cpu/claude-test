@@ -8,8 +8,8 @@ export const PROFILE = {
   bio: 'Psicoterapia para quem quer se entender melhor e viver com mais leveza. Atendimento online para todo o Brasil.',
 }
 
-// Coloque seu número com DDI + DDD, apenas dígitos (ex.: 5527999999999)
-export const WHATSAPP_NUMBER = '5500000000000'
+// Número com DDI + DDD, apenas dígitos
+export const WHATSAPP_NUMBER = '5527995323301'
 export const WHATSAPP_MESSAGE = 'Olá, Yuri! Vim pelo seu hub de links e gostaria de saber mais sobre as sessões.'
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
 
