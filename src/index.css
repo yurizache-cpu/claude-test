@@ -1,0 +1,750 @@
+:root {
+  /* Paleta alinhada a yuripsicologo.com.br */
+  --cream: #f5f0e8;
+  --cream-dark: #ede6d8;
+  --white: #fefcf8;
+  --sage: #4a6b5d;
+  --sage-light: #6b9b86;
+  --sage-dark: #2d4a3c;
+  --terracotta: #c4755b;
+  --terracotta-light: #d4917c;
+  --charcoal: #2b2d2a;
+  --warm-gray: #8a857d;
+  --sand: #d4cabb;
+
+  --bg: var(--cream);
+  --surface: rgba(254, 252, 248, 0.82);
+  --surface-solid: var(--white);
+  --line: rgba(43, 45, 42, 0.1);
+  --line-strong: rgba(43, 45, 42, 0.18);
+  --text: var(--charcoal);
+  --muted: #5f6159;
+  --faint: var(--warm-gray);
+  --sage-soft: rgba(74, 107, 93, 0.1);
+
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Outfit', system-ui, -apple-system, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--sage);
+  color: var(--white);
+}
+
+/* ---------- fundo ---------- */
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glow {
+  position: fixed;
+  top: -280px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 780px;
+  height: 620px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(107, 155, 134, 0.16) 0%, transparent 62%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---------- estrutura ---------- */
+
+.hub {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 72px 22px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ---------- perfil ---------- */
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+/* Medalhão com a foto, que "respira" com dois anéis. Tocar abre a
+   respiração guiada. */
+.avatar-breath {
+  position: relative;
+  width: 158px;
+  height: 158px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 10px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.avatar-breath:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 6px;
+  border-radius: 50%;
+}
+
+.breath-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(74, 107, 93, 0.55);
+  animation: breathe 7s ease-in-out infinite;
+}
+
+.breath-ring.delay {
+  animation-delay: -3.5s;
+  border-color: rgba(196, 117, 91, 0.35);
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(0.84);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.25;
+  }
+}
+
+.avatar-photo {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--white);
+  box-shadow: 0 14px 34px rgba(43, 45, 42, 0.22);
+  display: block;
+}
+
+/* Botão-convite para a respiração guiada, com pulso suave */
+.breath-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1.5px solid var(--sage-light);
+  color: var(--sage-dark);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 10px rgba(43, 45, 42, 0.08);
+  animation: cta-pulse 2.8s ease-out infinite;
+}
+
+.breath-cta:hover {
+  border-color: var(--sage);
+  background: var(--sage-soft);
+}
+
+.breath-cta:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 3px;
+}
+
+@keyframes cta-pulse {
+  0% {
+    box-shadow: 0 2px 10px rgba(43, 45, 42, 0.08), 0 0 0 0 rgba(74, 107, 93, 0.35);
+  }
+  70%, 100% {
+    box-shadow: 0 2px 10px rgba(43, 45, 42, 0.08), 0 0 0 14px rgba(74, 107, 93, 0);
+  }
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.profile h1 {
+  font-family: var(--serif);
+  font-size: 2.9rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.1;
+  margin: 8px 0 10px;
+  color: var(--sage-dark);
+}
+
+.name-letter {
+  display: inline-block;
+  white-space: pre;
+}
+
+.bio {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 27em;
+  text-wrap: balance;
+}
+
+.phrase {
+  min-height: 1.7em;
+  margin-top: 14px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--sage);
+}
+
+.phrase span {
+  display: inline-block;
+}
+
+/* ---------- grupos e cartões ---------- */
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-bottom: 30px;
+}
+
+.group-title {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--faint);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 3px;
+}
+
+.group-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--sand);
+}
+
+.link-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 17px 20px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(43, 45, 42, 0.05);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.card-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    220px circle at var(--px, 50%) var(--py, 50%),
+    rgba(107, 155, 134, 0.16),
+    transparent 65%
+  );
+  transition: opacity 0.3s ease;
+}
+
+.link-card:hover .card-sheen {
+  opacity: 1;
+}
+
+.link-card:hover {
+  border-color: var(--sage-light);
+  box-shadow: 0 16px 36px rgba(74, 107, 93, 0.18);
+}
+
+.link-card:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 3px;
+}
+
+.link-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--sage-soft);
+  color: var(--sage);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.link-card:hover .link-icon {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.link-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.link-text b {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.link-text span {
+  font-size: 0.83rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-arrow {
+  margin-left: auto;
+  color: var(--faint);
+  flex-shrink: 0;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.link-card:hover .link-arrow {
+  color: var(--sage);
+  transform: translate(2px, -2px);
+}
+
+/* cartão em destaque — verde sage, como o CTA do site */
+
+.link-card.highlight {
+  background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+  border-color: transparent;
+  color: var(--white);
+}
+
+.link-card.highlight .card-sheen {
+  background: radial-gradient(
+    220px circle at var(--px, 50%) var(--py, 50%),
+    rgba(254, 252, 248, 0.18),
+    transparent 65%
+  );
+}
+
+.link-card.highlight .link-icon {
+  background: rgba(254, 252, 248, 0.16);
+  color: var(--white);
+}
+
+.link-card.highlight .link-text span {
+  color: rgba(254, 252, 248, 0.78);
+}
+
+.link-card.highlight .link-arrow {
+  color: rgba(254, 252, 248, 0.7);
+}
+
+.link-card.highlight:hover {
+  box-shadow: 0 18px 40px rgba(45, 74, 60, 0.35);
+}
+
+/* ---------- compartilhar / toast ---------- */
+
+.share-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(43, 45, 42, 0.08);
+}
+
+.share-btn:hover {
+  border-color: var(--sage);
+  color: var(--sage);
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: var(--sage-dark);
+  color: var(--white);
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 16px 40px rgba(43, 45, 42, 0.3);
+}
+
+/* ---------- menu de compartilhar ---------- */
+
+.share-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(43, 45, 42, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 16px;
+}
+
+.share-sheet {
+  width: 100%;
+  max-width: 440px;
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: 22px;
+  padding: 18px 20px 20px;
+  box-shadow: 0 30px 70px rgba(43, 45, 42, 0.3);
+  margin-bottom: 8px;
+}
+
+.share-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  color: var(--sage-dark);
+}
+
+.share-sheet-close {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.share-sheet-close:hover {
+  border-color: var(--sage);
+  color: var(--sage);
+}
+
+.share-targets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.share-target {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 4px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.share-target:hover {
+  background: var(--cream);
+}
+
+.share-target-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--brand) 14%, transparent);
+  color: var(--brand);
+}
+
+.share-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 14px;
+  background: var(--cream);
+  border: 1px solid var(--sand);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.share-copy:hover {
+  border-color: var(--sage-light);
+}
+
+.share-copy-url {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.share-copy-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sage-dark);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+@media (min-width: 560px) {
+  .share-overlay {
+    align-items: center;
+  }
+}
+
+/* ---------- respiração guiada ---------- */
+
+.breath-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(45, 74, 60, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.breath-close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid rgba(254, 252, 248, 0.35);
+  color: rgba(254, 252, 248, 0.8);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.breath-close:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.breath-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+}
+
+.breath-orb {
+  position: relative;
+  width: min(58vw, 300px);
+  height: min(58vw, 300px);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(254, 252, 248, 0.35);
+}
+
+/* Contagem dos segundos no centro da bolinha */
+.breath-count {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 14vw, 4.6rem);
+  color: var(--sage-dark);
+  text-shadow: 0 1px 0 rgba(254, 252, 248, 0.4);
+  pointer-events: none;
+}
+
+.breath-orb-core {
+  width: 82%;
+  height: 82%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 32%,
+    rgba(245, 240, 232, 0.85),
+    rgba(107, 155, 134, 0.5) 60%,
+    rgba(107, 155, 134, 0.15) 100%
+  );
+  box-shadow: 0 0 90px rgba(245, 240, 232, 0.3);
+}
+
+.breath-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.breath-label {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  color: var(--white);
+}
+
+.breath-sub {
+  font-size: 0.88rem;
+  color: rgba(254, 252, 248, 0.75);
+}
+
+/* ---------- granulado ---------- */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- rodapé ---------- */
+
+.foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--faint);
+  margin-top: 18px;
+}
+
+/* Nota de apoio emocional (CVV) */
+.cvv-note {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  max-width: 30em;
+  padding: 13px 18px;
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid var(--sand);
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 0.25s ease;
+}
+
+.cvv-note svg {
+  flex-shrink: 0;
+  color: var(--terracotta);
+}
+
+.cvv-note b {
+  color: var(--sage-dark);
+}
+
+.cvv-note:hover {
+  border-color: var(--terracotta-light);
+}
+
+/* ---------- ajustes ---------- */
+
+@media (max-width: 420px) {
+  .profile h1 {
+    font-size: 2.4rem;
+  }
+
+  .link-text span {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-card,
+  .link-icon,
+  .link-arrow {
+    transition: none;
+  }
+
+  .breath-ring {
+    animation: none;
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+
+  .card-sheen {
+    display: none;
+  }
+
+  .breath-cta {
+    animation: none;
+  }
+}
