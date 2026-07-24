@@ -16,8 +16,7 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICo
 export const INSTAGRAM_USER = 'psi.yurizache'
 export const INSTAGRAM_URL = `https://instagram.com/${INSTAGRAM_USER}`
 
-// Troque pelo endereço real do seu site quando ele estiver no ar.
-export const SITE_URL = 'https://www.seusite.com.br'
+export const SITE_URL = 'https://yuripsicologo.com.br'
 
 export const EMAIL = 'yurizache@gmail.com'
 
