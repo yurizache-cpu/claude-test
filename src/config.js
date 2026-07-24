@@ -1,7 +1,7 @@
 // Tudo que aparece no hub é editado aqui: perfil, contatos e links.
 
 export const PROFILE = {
-  name: 'Yuri Zaché',
+  name: 'Yuri Zaché Ramos',
   photo: '/avatar.jpg',
   role: 'Psicólogo Clínico',
   crp: 'CRP 16/11434',
