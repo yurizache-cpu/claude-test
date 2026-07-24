@@ -18,7 +18,7 @@ export const INSTAGRAM_URL = `https://instagram.com/${INSTAGRAM_USER}`
 
 export const SITE_URL = 'https://yuripsicologo.com.br'
 
-export const EMAIL = 'yurizache@gmail.com'
+export const EMAIL = 'yurizache.psicologia@gmail.com'
 
 // Grupos de links. `highlight: true` deixa o cartão em destaque.
 // Para adicionar uma rede nova, copie um bloco e ajuste ícone, texto e link.
