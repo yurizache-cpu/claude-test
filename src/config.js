@@ -1,63 +1,77 @@
 // Tudo que aparece no hub é editado aqui: perfil, contatos e links.
 
 export const PROFILE = {
-  name: 'Zaché 3D',
-  tagline: 'Impressão 3D personalizada',
-  bio: 'Decoração, presentes e projetos sob medida — cada peça nasce camada por camada, com a sua cara.',
+  name: 'Yuri Zaché',
+  initials: 'YZ',
+  role: 'Psicólogo Clínico',
+  crp: 'CRP 16/11434',
+  bio: 'Psicoterapia para quem quer se entender melhor e viver com mais leveza. Atendimento online para todo o Brasil.',
 }
 
 // Coloque seu número com DDI + DDD, apenas dígitos (ex.: 5527999999999)
 export const WHATSAPP_NUMBER = '5500000000000'
-export const WHATSAPP_MESSAGE = 'Olá! Vim pelo seu hub de links e quero um orçamento.'
+export const WHATSAPP_MESSAGE = 'Olá, Yuri! Vim pelo seu hub de links e gostaria de saber mais sobre as sessões.'
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
 
-export const INSTAGRAM_USER = 'seu.perfil'
+export const INSTAGRAM_USER = 'psi.yurizache'
 export const INSTAGRAM_URL = `https://instagram.com/${INSTAGRAM_USER}`
+
+// Troque pelo endereço real do seu site quando ele estiver no ar.
+export const SITE_URL = 'https://www.seusite.com.br'
 
 export const EMAIL = 'yurizache@gmail.com'
 
-// Grupos de links. `highlight: true` deixa o cartão em destaque (cobre).
-// Troque os endereços de loja pelos seus — ou remova os que não usar.
+// Grupos de links. `highlight: true` deixa o cartão em destaque.
+// Para adicionar uma rede nova, copie um bloco e ajuste ícone, texto e link.
+// Ícones disponíveis: whatsapp, instagram, mail, site, youtube, spotify,
+// tiktok, calendar, article.
 export const LINK_GROUPS = [
   {
-    title: 'Fale comigo',
+    title: 'Vamos conversar',
     links: [
       {
         icon: 'whatsapp',
-        label: 'Pedir orçamento no WhatsApp',
-        desc: 'Resposta rápida, sem compromisso',
+        label: 'Agendar uma conversa',
+        desc: 'Tire suas dúvidas sobre as sessões pelo WhatsApp',
         href: WHATSAPP_URL,
         highlight: true,
       },
       {
-        icon: 'instagram',
-        label: 'Instagram',
-        desc: `@${INSTAGRAM_USER} — bastidores e novidades`,
-        href: INSTAGRAM_URL,
+        icon: 'site',
+        label: 'Meu site',
+        desc: 'Sobre mim, abordagem e como funciona a terapia',
+        href: SITE_URL,
       },
       {
         icon: 'mail',
         label: 'E-mail',
         desc: EMAIL,
-        href: `mailto:${EMAIL}?subject=${encodeURIComponent('Orçamento de impressão 3D')}`,
+        href: `mailto:${EMAIL}?subject=${encodeURIComponent('Contato — psicoterapia')}`,
       },
     ],
   },
   {
-    title: 'Onde comprar',
+    title: 'Me acompanhe',
     links: [
       {
-        icon: 'store',
-        label: 'Loja na Shopee',
-        desc: 'Peças prontas com envio para todo o Brasil',
-        href: 'https://shopee.com.br/',
+        icon: 'instagram',
+        label: 'Instagram',
+        desc: `@${INSTAGRAM_USER} — conteúdo sobre saúde mental`,
+        href: INSTAGRAM_URL,
       },
-      {
-        icon: 'gift',
-        label: 'Loja no Elo7',
-        desc: 'Presentes e peças personalizadas',
-        href: 'https://elo7.com.br/',
-      },
+      // Exemplos prontos — descomente e ajuste quando criar os perfis:
+      // {
+      //   icon: 'youtube',
+      //   label: 'YouTube',
+      //   desc: 'Vídeos sobre psicologia no dia a dia',
+      //   href: 'https://youtube.com/@seucanal',
+      // },
+      // {
+      //   icon: 'tiktok',
+      //   label: 'TikTok',
+      //   desc: '@seuperfil',
+      //   href: 'https://tiktok.com/@seuperfil',
+      // },
     ],
   },
 ]

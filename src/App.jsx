@@ -2,32 +2,35 @@ import { useState } from 'react'
 import { AnimatePresence, motion as Motion } from 'framer-motion'
 import {
   ArrowUpRight,
+  CalendarDays,
   Check,
-  Gift,
+  Globe,
   Instagram,
   Mail,
   MessageCircle,
+  Music2,
+  Newspaper,
   Share2,
-  Store,
+  Youtube,
 } from 'lucide-react'
 import Background from './components/Background.jsx'
-import LayerArt from './components/LayerArt.jsx'
 import { LINK_GROUPS, PROFILE } from './config.js'
 
 const ICONS = {
   whatsapp: MessageCircle,
   instagram: Instagram,
   mail: Mail,
-  store: Store,
-  gift: Gift,
+  site: Globe,
+  youtube: Youtube,
+  spotify: Music2,
+  tiktok: Music2,
+  calendar: CalendarDays,
+  article: Newspaper,
 }
-
-// Vasinho que se "imprime" dentro do medalhão do perfil.
-const AVATAR_LAYERS = [0.5, 0.62, 0.7, 0.72, 0.68, 0.58, 0.46, 0.36, 0.3, 0.28, 0.34, 0.46]
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.25 } },
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } },
 }
 
 const item = {
@@ -39,7 +42,7 @@ function ShareButton() {
   const [copied, setCopied] = useState(false)
 
   const share = async () => {
-    const data = { title: PROFILE.name, text: PROFILE.tagline, url: window.location.href }
+    const data = { title: PROFILE.name, text: PROFILE.role, url: window.location.href }
     if (navigator.share) {
       try {
         await navigator.share(data)
@@ -119,14 +122,15 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: 'easeOut' }}
         >
-          <div className="avatar-ring">
-            <LayerArt layers={AVATAR_LAYERS} width={62} height={64} printing />
+          <div className="avatar-breath" aria-hidden="true">
+            <span className="breath-ring" />
+            <span className="breath-ring delay" />
+            <span className="avatar-mono">{PROFILE.initials}</span>
           </div>
-          <span className="eyebrow">{PROFILE.tagline}</span>
-          <h1>
-            {PROFILE.name.replace(' 3D', '')}
-            <sup>3D</sup>
-          </h1>
+          <span className="eyebrow">
+            {PROFILE.role} · {PROFILE.crp}
+          </span>
+          <h1>{PROFILE.name}</h1>
           <p className="bio">{PROFILE.bio}</p>
         </Motion.header>
 
@@ -149,7 +153,7 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
         >
-          © {new Date().getFullYear()} {PROFILE.name} — feito camada por camada
+          © {new Date().getFullYear()} {PROFILE.name} · {PROFILE.crp}
         </Motion.footer>
       </main>
     </>

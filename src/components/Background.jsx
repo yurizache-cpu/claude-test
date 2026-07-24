@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
-// Fundo ambiente: "camadas de impressão" flutuando lentamente para cima,
-// com paralaxe suave conforme o mouse se move. Respeita reduced-motion.
+// Fundo ambiente: esferas de luz suaves que derivam lentamente, como uma
+// respiração — com paralaxe leve conforme o mouse. Respeita reduced-motion.
 export default function Background() {
   const canvasRef = useRef(null)
 
@@ -14,17 +14,17 @@ export default function Background() {
     const mouse = { x: 0.5, y: 0.5 }
     const target = { x: 0.5, y: 0.5 }
 
-    const COLORS = ['#d89a5b', '#b06a2f', '#e6dac4']
-    const bars = Array.from({ length: 30 }, () => ({
+    const COLORS = ['163, 201, 178', '110, 155, 130', '217, 205, 175']
+    const orbs = Array.from({ length: 7 }, (_, i) => ({
       x: Math.random(),
       y: Math.random(),
-      w: 44 + Math.random() * 110,
-      h: 5 + Math.random() * 4,
+      r: 120 + Math.random() * 200,
       depth: 0.25 + Math.random() * 0.75,
-      speed: 0.05 + Math.random() * 0.16,
-      sway: Math.random() * Math.PI * 2,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      alpha: 0.04 + Math.random() * 0.09,
+      phase: Math.random() * Math.PI * 2,
+      driftX: 0.00006 + Math.random() * 0.0001,
+      driftY: 0.00004 + Math.random() * 0.00008,
+      color: COLORS[i % COLORS.length],
+      alpha: 0.04 + Math.random() * 0.05,
     }))
 
     const resize = () => {
@@ -46,30 +46,31 @@ export default function Background() {
     let t = 0
     const draw = () => {
       t += 1
-      mouse.x += (target.x - mouse.x) * 0.04
-      mouse.y += (target.y - mouse.y) * 0.04
+      mouse.x += (target.x - mouse.x) * 0.035
+      mouse.y += (target.y - mouse.y) * 0.035
       ctx.clearRect(0, 0, width, height)
 
-      for (const b of bars) {
+      for (const o of orbs) {
         if (!reduced) {
-          b.y -= (b.speed * b.depth) / height
-          if (b.y < -0.06) {
-            b.y = 1.06
-            b.x = Math.random()
-          }
+          o.x = (o.x + o.driftX + 1) % 1
+          o.y = (o.y + o.driftY + 1) % 1
         }
-        const swayX = reduced ? 0 : Math.sin(t * 0.008 + b.sway) * 14 * b.depth
-        const parX = (mouse.x - 0.5) * -46 * b.depth
-        const parY = (mouse.y - 0.5) * -30 * b.depth
-        const x = b.x * width + swayX + parX - b.w / 2
-        const y = b.y * height + parY
-        ctx.globalAlpha = b.alpha
-        ctx.fillStyle = b.color
+        // "Respiração": o raio cresce e diminui num ciclo lento (~7s)
+        const breath = reduced ? 1 : 1 + Math.sin(t * 0.015 + o.phase) * 0.12
+        const parX = (mouse.x - 0.5) * -60 * o.depth
+        const parY = (mouse.y - 0.5) * -40 * o.depth
+        const x = o.x * width + parX
+        const y = o.y * height + parY
+        const r = o.r * o.depth * breath
+
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, r)
+        grad.addColorStop(0, `rgba(${o.color}, ${o.alpha})`)
+        grad.addColorStop(1, `rgba(${o.color}, 0)`)
+        ctx.fillStyle = grad
         ctx.beginPath()
-        ctx.roundRect(x, y, b.w * b.depth, b.h * b.depth, b.h)
+        ctx.arc(x, y, r, 0, Math.PI * 2)
         ctx.fill()
       }
-      ctx.globalAlpha = 1
       raf = requestAnimationFrame(draw)
     }
 
