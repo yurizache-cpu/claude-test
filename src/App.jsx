@@ -5,6 +5,7 @@ import {
   CalendarDays,
   Check,
   Globe,
+  HeartHandshake,
   Instagram,
   Mail,
   MessageCircle,
@@ -96,16 +97,29 @@ function ShareButton() {
   const [copied, setCopied] = useState(false)
 
   const share = async () => {
-    const data = { title: PROFILE.name, text: PROFILE.role, url: window.location.href }
+    const url = window.location.href
     if (navigator.share) {
       try {
-        await navigator.share(data)
+        await navigator.share({ title: PROFILE.name, text: PROFILE.role, url })
         return
-      } catch {
-        return
+      } catch (err) {
+        // Usuário cancelou o menu de compartilhar: não é erro.
+        if (err?.name === 'AbortError') return
       }
     }
-    await navigator.clipboard.writeText(window.location.href)
+    try {
+      await navigator.clipboard.writeText(url)
+    } catch {
+      // Navegadores que bloqueiam a área de transferência
+      const ta = document.createElement('textarea')
+      ta.value = url
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand('copy')
+      ta.remove()
+    }
     setCopied(true)
     setTimeout(() => setCopied(false), 2200)
   }
@@ -248,7 +262,21 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 0.8 }}
         >
-          © {new Date().getFullYear()} {PROFILE.name} · {PROFILE.crp}
+          <a
+            className="cvv-note"
+            href="https://www.cvv.org.br"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <HeartHandshake size={16} strokeWidth={1.8} />
+            <span>
+              Em crise ou precisando de apoio emocional imediato?{' '}
+              <b>CVV — ligue 188</b> (gratuito, 24h) ou acesse cvv.org.br
+            </span>
+          </a>
+          <span>
+            © {new Date().getFullYear()} {PROFILE.name} · {PROFILE.crp}
+          </span>
         </Motion.footer>
       </main>
 

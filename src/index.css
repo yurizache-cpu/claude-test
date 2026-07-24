@@ -540,10 +540,45 @@ body {
 /* ---------- rodapé ---------- */
 
 .foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   text-align: center;
   font-size: 0.8rem;
   color: var(--faint);
   margin-top: 18px;
+}
+
+/* Nota de apoio emocional (CVV) */
+.cvv-note {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  max-width: 30em;
+  padding: 13px 18px;
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid var(--sand);
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 0.25s ease;
+}
+
+.cvv-note svg {
+  flex-shrink: 0;
+  color: var(--terracotta);
+}
+
+.cvv-note b {
+  color: var(--sage-dark);
+}
+
+.cvv-note:hover {
+  border-color: var(--terracotta-light);
 }
 
 /* ---------- ajustes ---------- */

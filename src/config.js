@@ -69,6 +69,12 @@ export const LINK_GROUPS = [
         desc: `@${INSTAGRAM_USER} — conteúdo sobre saúde mental`,
         href: INSTAGRAM_URL,
       },
+      {
+        icon: 'article',
+        label: 'Blog',
+        desc: 'Artigos sobre psicologia e saúde mental',
+        href: `${SITE_URL}/blog`,
+      },
       // Exemplos prontos — descomente e ajuste quando criar os perfis:
       // {
       //   icon: 'youtube',
